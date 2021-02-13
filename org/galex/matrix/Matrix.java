@@ -25,7 +25,7 @@ public class Matrix {
         this.array[r][c] = complexNumber;
     }
 
-    public Matrix plus(Matrix secondMatrix) {
+    public Matrix plus(Matrix secondMatrix) throws ArithmeticException{
         if (this.c == secondMatrix.c && this.r == secondMatrix.r) {
             Matrix newMatrix = new Matrix(r, c);
             for (int i = 0; i < r; i++) {
@@ -35,12 +35,11 @@ public class Matrix {
             }
             return newMatrix;
         } else {
-            System.out.println("Can't do this");
-            return this;
+            throw new ArithmeticException("It's impossible to add matrices with different sizes");
         }
     }
 
-    public Matrix subtract(Matrix secondMatrix) {
+    public Matrix subtract(Matrix secondMatrix) throws ArithmeticException{
         if (this.c == secondMatrix.c && this.r == secondMatrix.r) {
             Matrix newMatrix = new Matrix(r, c);
             for (int i = 0; i < r; i++) {
@@ -50,12 +49,11 @@ public class Matrix {
             }
             return newMatrix;
         } else {
-            System.out.println("Can't do this");
-            return this;
+            throw new ArithmeticException("It's impossible to subtract matrices with different sizes");
         }
     }
 
-    public Matrix multiply(Matrix secondMatrix) {
+    public Matrix multiply(Matrix secondMatrix) throws ArithmeticException{
         if (this.c == secondMatrix.r) {
             Matrix newMatrix = new Matrix(this.r, secondMatrix.c);
             for (int i = 0; i < newMatrix.getRows(); i++) {
@@ -69,8 +67,7 @@ public class Matrix {
             }
             return newMatrix;
         } else {
-            System.out.println("Can't do this");
-            return this;
+            throw new ArithmeticException("It's impossible to multiply those matrices");
         }
     }
 
@@ -84,12 +81,11 @@ public class Matrix {
         return newMatrix;
     }
 
-    public ComplexNumber getDeterminant() {
+    public ComplexNumber getDeterminant() throws ArithmeticException{
         if (this.r == this.c) {
             return determinant(this.array);
         } else {
-            System.out.println("Can't do this");
-            return new ComplexNumber(0, 0);
+            throw new ArithmeticException("It is not possible to get a determinant from a non-squared matrix");
         }
     }
 
