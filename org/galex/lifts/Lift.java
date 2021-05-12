@@ -37,17 +37,13 @@ public class Lift {
                 + " этаже высаживает " + outNumbers[currentFloor] + " человек, " + currentLoad + " человек всего");
         outNumbers[currentFloor] = 0;
         try {
-          Thread.sleep(1000);
+          Thread.sleep(4000);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
       }
       synchronized (requestQueue) {
         if (isAnyRequest() || isAnyUnload()) {
-          if (!isAnyReqOnWay() && !isAnyUnloadOnWay()) {
-            changeDirection();
-            System.out.println("Лифт " + id + " сменил направление");
-          }
           if (isAnyReqOnFloor()) {
             Iterator<Request> iterator = requestQueue.iterator();
             while (iterator.hasNext()) {
@@ -61,6 +57,10 @@ public class Lift {
               }
             }
           }
+          if (!isAnyReqOnWay() && !isAnyUnloadOnWay()) {
+            changeDirection();
+            System.out.println("Лифт " + id + " сменил направление");
+          }
           if (direction == Direction.UP && currentFloor < maxFloor - 1) {
             currentFloor++;
             System.out.println("Лифт " + id + " поднялся на " + currentFloor
@@ -73,7 +73,7 @@ public class Lift {
         }
       }
       try {
-        Thread.sleep(1000);
+        Thread.sleep(4000);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
